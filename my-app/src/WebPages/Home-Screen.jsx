@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "./Home-Screen.css";
 import { WiDaySunny, WiCloud, WiRain, WiSnow, WiThunderstorm, WiHumidity, WiStrongWind} from "react-icons/wi"; 
+import Lottie from "lottie-react";
+import clearSkyAnimation from "./animations/Clear.json";
+import rainAnimation from "./animations/Rain.json";
+import cloudyAnimation from "./animations/Cloudy.json";
+import snowAnimation from "./animations/Snow.json";
+import thunderAnimation from "./animations/Thunder.json";
 
 const weatherIcons = {
   Clear: <WiDaySunny size={50} />,
@@ -8,6 +14,14 @@ const weatherIcons = {
   Rain: <WiRain size={50} />,
   Snow: <WiSnow size={50} />,
   Thunderstorm: <WiThunderstorm size={50} />,
+};
+
+const weatherAnimations = {
+  Clear: clearSkyAnimation,
+  Clouds: cloudyAnimation,
+  Rain: rainAnimation,
+  Snow: snowAnimation,
+  Thunderstorm: thunderAnimation,
 };
 
 const Home = () => {
@@ -32,6 +46,15 @@ const Home = () => {
   };
 
    return (
+    <div className="home-container">
+    {/* Animated Weather Background */}
+    {weather && (
+      <Lottie
+        animationData={weatherAnimations[weather.weather[0].main] || clearSkyAnimation}
+        className="weather-animation"
+      />
+    )}
+
     <div>
       <section className="top-banner">
         <div className="container">
@@ -68,6 +91,7 @@ const Home = () => {
           </div>
         </section>
       )}
+    </div>
     </div>
   );
 };
