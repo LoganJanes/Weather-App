@@ -108,3 +108,34 @@
   .container {
     display: grid;
   }
+
+  .weather-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .weather-card {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    width: 250px;
+  }
+  
+  .weather-icon {
+    font-size: 50px;
+  }
+  
+  .temp {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .description {
+    text-transform: capitalize;
+  }
+  

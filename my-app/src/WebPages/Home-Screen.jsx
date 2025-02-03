@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import "./Home-Screen.css";
+import { WiDaySunny, WiCloud, WiRain, WiSnow, WiThunderstorm, WiHumidity, WiStrongWind} from "react-icons/wi"; 
+
+const weatherIcons = {
+  Clear: <WiDaySunny size={50} />,
+  Clouds: <WiCloud size={50} />,
+  Rain: <WiRain size={50} />,
+  Snow: <WiSnow size={50} />,
+  Thunderstorm: <WiThunderstorm size={50} />,
+};
 
 const Home = () => {
   const [city, setCity] = useState("");
@@ -26,7 +35,7 @@ const Home = () => {
     <div>
       <section className="top-banner">
         <div className="container">
-          <h1 className="heading">Simple Weather App</h1>
+          <h1 className="heading">Quick Weather Lookup</h1>
           <form onSubmit={fetchWeather}>
             <input
               type="text"
@@ -40,15 +49,27 @@ const Home = () => {
         </div>
       </section>
       {weather && (
-        <section className="ajax-section">
-          <div className="container">
-            <h2>{weather.name}</h2>
-            <p>{weather.weather[0].description}</p>
-            <p>{weather.main.temp}°C</p>
+        <section className="weather-cards">
+          <div className="weather-card">
+            <h2 className="city-name">
+              {weather.name}, <span className="country-code">{weather.sys.country}</span>
+            </h2>
+            <div className="weather-icon">
+              {weatherIcons[weather.weather[0].main] || <WiCloud size={60} />}
+            </div>
+            <p className="temp">{weather.main.temp}°C</p>
+            <p className="description">{weather.weather[0].description}</p>
+
+            <div className="extra-info">
+              <p><WiHumidity size={30} /> Humidity: {weather.main.humidity}%</p>
+              <p><WiStrongWind size={30} /> Wind Speed: {weather.wind.speed} m/s</p>
+              <p>Feels Like: {weather.main.feels_like}°C</p>
+            </div>
           </div>
         </section>
       )}
     </div>
   );
 };
+
 export default Home;
