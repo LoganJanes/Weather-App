@@ -34,8 +34,9 @@ const Home = () => {
     if (!city) return;
 
     try {
+      const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e444a438aabcb5f87d058e49b7faf2d9&units=metric`
+       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
       );
       if (!response.ok) throw new Error("City not found");
       const data = await response.json();
